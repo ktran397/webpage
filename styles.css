@@ -36,20 +36,27 @@ nav {
 nav ul {
     display: flex;
     justify-content: center;
+    align-items: center;
     list-style: none;
 }
 
 nav li {
-    margin: 0 1rem;
+    margin: 0 0.5rem;
 }
 
 nav a {
     text-decoration: none;
     color: #333;
     font-weight: 600;
-    padding: 1rem;
-    display: inline-block;
+    padding: 0.3rem 1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 140px;
     transition: 0.3s;
+    border: 2px solid rgba(42, 82, 152, 0.28);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.35);
 }
 
 nav a:hover,
