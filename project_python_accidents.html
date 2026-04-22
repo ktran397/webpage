@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Detailed project page for Kevin Tran's Python driving accident analysis project.">
+    <title>Python Driving Accident Analysis | Kevin Tran</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <button id="darkModeToggle" type="button" aria-label="Toggle dark mode">
+            <i class="fas fa-moon" aria-hidden="true"></i>
+        </button>
+        <h1>Python Driving Accident Analysis</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="resume.html">Resume</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section>
+            <p><a href="portfolio.html">Back to Portfolio</a></p>
+            <img src="data/weather_vs_severity.png" alt="Python-generated graph comparing weather conditions and accident severity">
+            <p class="resume-meta">Project Type: Python Data Analysis and Visualization</p>
+        </section>
+
+        <section class="project-details">
+            <h2>Overview</h2>
+            <p>
+                This project used Python to analyze driving accident data and produce visual summaries of key
+                patterns in the dataset. The goal was to explore how driver age and weather conditions related
+                to accident severity and frequency through clear, data-driven graphs.
+            </p>
+
+            <h2>Methods</h2>
+            <ul>
+                <li>Obatained large driving accident dataset from Kaggle</li>
+                <li>Wrote clean python code to clean up the dataset and perform analysis</li>
+                <li>Grouped records by variables such as driver age band, weather conditions, and severity level.</li>
+                <li>Created comparative plots to make trends and differences easier to interpret.</li>
+                <li>Used graph outputs to communicate findings in a concise and readable way.</li>
+            </ul>
+
+            <h2>Outcome</h2>
+            <p>
+                The final visualizations highlight how accident patterns vary across demographic and environmental
+                factors. This project demonstrates practical Python skills for cleaning data, summarizing trends,
+                and turning raw records into informative graphics.
+            </p>
+        </section>
+
+        <section>
+            <h2>Driving Accident Graphs</h2>
+            <div class="project-gallery">
+                <figure>
+                    <img src="data/weather_vs_severity.png" alt="Graph comparing weather conditions and accident severity">
+                    <figcaption>Weather conditions compared against accident severity levels.</figcaption>
+                </figure>
+                <figure>
+                    <img src="data/age_band_vs_severity.png" alt="Graph comparing age bands and accident severity">
+                    <figcaption>Driver age bands compared with accident severity patterns.</figcaption>
+                </figure>
+                <figure>
+                    <img src="data/age_band_of_driver.png" alt="Graph showing distribution of driver age bands">
+                    <figcaption>Distribution of accident records across driver age groups.</figcaption>
+                </figure>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Kevin Tran</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

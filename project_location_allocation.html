@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Detailed project page for Kevin Tran's location-allocation analysis project.">
+    <title>Location-Allocation Analysis | Kevin Tran</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <button id="darkModeToggle" type="button" aria-label="Toggle dark mode">
+            <i class="fas fa-moon" aria-hidden="true"></i>
+        </button>
+        <h1>Location-Allocation Analysis</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="resume.html">Resume</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section>
+            <p><a href="portfolio.html">Back to Portfolio</a></p>
+            <img src="data/LocationAllocation.png" alt="Map showing a location-allocation analysis for communities near major attractions in San Diego">
+            <p class="resume-meta">Project Type: Network Analysis</p>
+        </section>
+
+        <section class="project-details">
+            <h2>Overview</h2>
+            <p>
+                This project analyzed access to major attractions in San Diego using location-allocation methods.
+                Community points and attraction points were used to identify which areas could reach selected
+                destinations within a 10-minute drive.
+            </p>
+            <h2>Methods</h2>
+            <ul>
+                <li>Used automobile travel time as the network cost.</li>
+                <li>Directed demand toward five selected facilities.</li>
+                <li>Applied a 10-minute cutoff to evaluate service coverage.</li>
+                <li>Compared which communities were served within the defined travel threshold.</li>
+            </ul>
+            <h2>Outcome</h2>
+            <p>
+                The final map shows which San Diego communities fall within the accessibility range of the chosen
+                attractions. This type of analysis can support planning decisions related to recreation access,
+                public amenities, and community service coverage.
+            </p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Kevin Tran</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

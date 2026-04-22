@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Interactive Calgary GIS web map project by Kevin Tran using Leaflet and online GeoJSON feature layers.">
+    <title>Interactive Calgary GIS Web Map | Kevin Tran</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+</head>
+<body>
+    <header>
+        <button id="darkModeToggle" type="button" aria-label="Toggle dark mode">
+            <i class="fas fa-moon" aria-hidden="true"></i>
+        </button>
+        <h1>Interactive Calgary GIS Web Map</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="resume.html">Resume</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section>
+            <p><a href="portfolio.html">Back to Portfolio</a></p>
+            <p class="resume-meta">Project Type: Web Mapping and Calgary Open Data Integration</p>
+            <div id="webmap" class="webmap-frame" aria-label="Interactive web map"></div>
+            <p class="map-note">This demo loads Calgary open-data GeoJSON layers online and displays them with custom styling, popups, and layer controls.</p>
+        </section>
+
+        <section class="project-details">
+            <h2>Overview</h2>
+            <p>
+                This project demonstrates web mapping knowledge using Leaflet, an open-source JavaScript mapping
+                library. The map is focused on Calgary and combines a basemap with online GeoJSON feature layers
+                from the City of Calgary open data portal to show how spatial data can be loaded, styled, and
+                explored directly in the browser.
+            </p>
+
+            <h2>Methods</h2>
+            <ul>
+                <li>Initialized an interactive Leaflet map centered on Calgary with OpenStreetMap tiles.</li>
+                <li>Loaded Calgary Ward Boundaries and the Calgary LRT centre line as online GeoJSON using <code>fetch()</code>.</li>
+                <li>Styled polygon and line layers differently to separate electoral areas and transit infrastructure.</li>
+                <li>Added popups and a layer control to improve map interactivity and usability.</li>
+            </ul>
+
+            <h2>Outcome</h2>
+            <p>
+                The result is a browser-based Calgary map that highlights practical web map programming skills,
+                including layer management, feature interaction, asynchronous data loading, and local open-data
+                integration for a more relevant portfolio example.
+            </p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Kevin Tran</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script>
+        const map = L.map("webmap").setView([51.0447, -114.0719], 11);
+
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+            maxZoom: 19,
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        function pickProperty(properties, keys, fallback) {
+            for (const key of keys) {
+                if (properties[key]) {
+                    return properties[key];
+                }
+            }
+            return fallback;
+        }
+
+        const wardsLayer = L.geoJSON(null, {
+            style: {
+                color: "#2a5298",
+                weight: 1.5,
+                fillColor: "#f4d06f",
+                fillOpacity: 0.18
+            },
+            onEachFeature(feature, layer) {
+                const ward = pickProperty(
+                    feature.properties,
+                    ["ward_num", "ward", "name", "label"],
+                    "Calgary ward"
+                );
+                layer.bindPopup(`<strong>Ward ${ward}</strong>`);
+            }
+        }).addTo(map);
+
+        const lrtLayer = L.geoJSON(null, {
+            style: {
+                color: "#d94f30",
+                weight: 4,
+                opacity: 0.95
+            },
+            onEachFeature(feature, layer) {
+                const lineName = pickProperty(
+                    feature.properties,
+                    ["name", "line_name", "route_name", "shape_leng"],
+                    "LRT line"
+                );
+                layer.bindPopup(`<strong>${lineName}</strong>`);
+            }
+        }).addTo(map);
+
+        const overlays = {
+            "Ward Boundaries": wardsLayer,
+            "LRT Centre Line": lrtLayer
+        };
+
+        L.control.layers(null, overlays, { collapsed: false }).addTo(map);
+
+        const ResetControl = L.Control.extend({
+            options: {
+                position: "topleft"
+            },
+            onAdd() {
+                const button = L.DomUtil.create("button", "map-reset-btn");
+                button.type = "button";
+                button.textContent = "Reset View";
+                button.setAttribute("aria-label", "Reset map view");
+
+                L.DomEvent.disableClickPropagation(button);
+                L.DomEvent.on(button, "click", () => {
+                    map.setView([51.0447, -114.0719], 11);
+                });
+
+                return button;
+            }
+        });
+
+        map.addControl(new ResetControl());
+
+        Promise.all([
+            fetch("https://data.calgary.ca/resource/r9vx-mhnf.geojson?$limit=5000").then((response) => response.json()),
+            fetch("https://data.calgary.ca/resource/kmts-cfkc.geojson?$limit=5000").then((response) => response.json())
+        ]).then(([wardsData, lrtData]) => {
+            wardsLayer.addData(wardsData);
+            lrtLayer.addData(lrtData);
+
+            const allBounds = L.featureGroup([wardsLayer, lrtLayer]).getBounds();
+            if (allBounds.isValid()) {
+                map.fitBounds(allBounds.pad(0.05));
+            }
+        }).catch(() => {
+            const note = document.querySelector(".map-note");
+            if (note) {
+                note.textContent = "The Calgary web map could not load the online GeoJSON layers right now, but the page still demonstrates the Leaflet setup and local open-data workflow.";
+            }
+        });
+    </script>
+</body>
+</html>

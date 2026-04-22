@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Detailed project page for Kevin Tran's Radiant Creek stream restoration monitoring project using remote sensing.">
+    <title>Radiant Creek Remote Sensing Project | Kevin Tran</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <button id="darkModeToggle" type="button" aria-label="Toggle dark mode">
+            <i class="fas fa-moon" aria-hidden="true"></i>
+        </button>
+        <h1>Stream Restoration Monitoring at Radiant Creek Using Remote Sensing</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="resume.html">Resume</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section>
+            <p><a href="portfolio.html">Back to Portfolio</a></p>
+            <img src="data/orthoRadiant.png" alt="Orthomosaic image of Radiant Creek used for restoration monitoring">
+            <p class="resume-meta">Project Type: Remote Sensing and Environmental Monitoring</p>
+        </section>
+
+        <section class="project-details">
+            <h2>Overview</h2>
+            <p>
+                This project focused on monitoring stream restoration at Radiant Creek using remote sensing
+                products. The analysis used imagery and derived raster outputs to examine vegetation, water-related
+                patterns, and land cover conditions across the restoration area.
+            </p>
+
+            <h2>Methods</h2>
+            <ul>
+                <li>Obtained Satellite imagery from PlanetLabs and Corponicus Browser.</li>
+                <li>Preprocessed and clipped imagery to study area.</li>
+                <li>Used supervised machine learning to produce landcover classification rasters.</li>
+                <li>Used raster calculator tool to produce NDVI maps using red and NIR band.</li>
+                <li>Used raster calculator tool to produce NDWI maps using NIR and SWIR band.</li>
+                <li>Evaluate change using GIS tools.</li>
+            </ul>
+
+            <h2>Outcome</h2>
+            <p>
+                The project created a set of remote sensing products that can support restoration monitoring by
+                showing how vegetation, surface moisture, and land cover vary across the site. Together, these
+                outputs provide a stronger picture of current stream conditions and help communicate restoration
+                progress visually.
+            </p>
+        </section>
+
+        <section>
+            <h2>Radiant Creek Images</h2>
+            <div class="project-gallery">
+                <figure>
+                    <img src="data/orthoRadiant.png" alt="Orthomosaic of the Radiant Creek study area">
+                    <figcaption>Orthomosaic image used as the base view of the site.</figcaption>
+                </figure>
+                <figure>
+                    <img src="data/ClassifiedRadiant.png" alt="Classified image of Radiant Creek showing land cover classes">
+                    <figcaption>Classified raster showing land cover categories across the project area.</figcaption>
+                </figure>                
+                <figure>
+                    <img src="data/NDVIRandiant.png" alt="NDVI visualization for Radiant Creek showing vegetation patterns">
+                    <figcaption>NDVI output used to assess vegetation condition and distribution.</figcaption>
+                </figure>
+                <figure>
+                    <img src="data/NDWIRadiant.png" alt="NDWI visualization for Radiant Creek showing water and moisture patterns">
+                    <figcaption>NDWI output highlighting water and surface moisture patterns.</figcaption>
+                </figure>
+
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Kevin Tran</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
